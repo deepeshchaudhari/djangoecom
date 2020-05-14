@@ -1,0 +1,7 @@
+static file in blog
+python manage.py migrate
+
+python manage.py makesmigrations
+
+
+python manage.py createsuperuser
