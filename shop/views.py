@@ -20,12 +20,15 @@ def index(request):
 def about(request):
     return render(request,'shop/about.html')
 def contact(request):
-    return HttpResponse("WE ARE AT CONTACT")
+    return render(request,'shop/contact.html')
 def tracker(request):
-    return HttpResponse("WE ARE AT TRACKER")
+    return render(request,'shop/tracker.html')
 def search(request):
-    return HttpResponse("WE ARE AT SEARCH")
-def prodview(request):
-    return HttpResponse("WE ARE AT PRODUCT VIEW")
+    return render(request, 'shop/search.html')
+def prodview(request,myid):
+    product = Product.objects.filter(id=myid)
+    # product is a list so product[0] in dictionary
+    params={'product':product[0]}
+    return render(request,'shop/prodView.html',params)
 def checkout(request):
-    return HttpResponse("WE ARE AT CHEKOUT")
+    return render(request,'shop/checkout.html')
