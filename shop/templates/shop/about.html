@@ -40,3 +40,48 @@
 </main>
 
 {% endblock %}
+{% block js %}
+<script type="text/javascript">
+//about.html
+//find out the cart from localStorage....
+    if (localStorage.getItem('cart')==null){
+    var cart = {};
+    }else{
+    cart = JSON.parse(localStorage.getItem('cart'));
+    updatecart(cart);
+    }
+function updatecart(cart){
+      sum=0;
+      for (var item in cart){
+        sum= sum+cart[item][0];        
+      }
+      //console.log(cart);
+      localStorage.setItem('cart',JSON.stringify(cart));
+      document.getElementById('cart').innerHTML = sum;
+      updatePopover(cart);
+    }
+
+
+
+
+// add popover to cart
+$('#popcart').popover();
+updatePopover(cart);
+function updatePopover(cart){
+      popStr = localStorage.getItem('cartcontent');
+      //console.log(popStr);
+      document.getElementById("popcart").setAttribute('data-content',popStr);
+      $('#popcart').popover('show');
+         }  
+
+function clearCart() {
+    cart = JSON.parse(localStorage.getItem('cart'));
+    localStorage.clear();
+    cart = {};
+    popStr='<strong>Cart is Empty</strong><br>Shop now...';
+    localStorage.setItem("cartcontent",popStr);
+    updatecart(cart);
+    updatePopover(cart);
+    }
+  </script>
+{% endblock %}

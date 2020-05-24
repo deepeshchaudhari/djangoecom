@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 # import models or database
-from .models import Product
+from .models import Product,Contact
 # Create your views here.
 def index(request):
     allProds = []
@@ -20,6 +20,15 @@ def index(request):
 def about(request):
     return render(request,'shop/about.html')
 def contact(request):
+    if request.method == "POST":
+        firstname = request.POST.get('firstname','')
+        lastname = request.POST.get('lastname','')
+        email= request.POST.get('email','')
+        phone= request.POST.get('contact','')
+        username= request.POST.get('username','')
+        address= request.POST.get('address','')
+        contact= Contact(firstname=firstname,lastname=lastname,email=email,contact=phone,username=username,address=address)
+        contact.save()
     return render(request,'shop/contact.html')
 def tracker(request):
     return render(request,'shop/tracker.html')
