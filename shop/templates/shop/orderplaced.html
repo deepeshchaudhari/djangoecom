@@ -1,0 +1,30 @@
+{%  extends 'shop/basic.html'%}
+
+{% block title %} Title of Contact{% endblock %}
+ {% block css %}
+
+{% endblock %}
+{% block body %}
+<div class="container ">
+  <div class="py-5 text-center">
+    <h2>Contact Us</h2>
+    <p class="lead">Thanks for Ordering...</p>
+  </div>
+    <div class="col-md-12 " >
+      <h4 id="result"></h4>
+    </div>
+</div>
+
+{% endblock %}
+{% block js%}
+    <script>
+        {% if thank %}
+        alert('Thanks for ordering with us. Your order is is {{id}}. Use it to track your order using our order tracker');
+        localStorage.clear();
+        result.innerText = "Your order has been placed successfully!!!";
+        {% else %}
+        result.innerText = "Fill the form first!!!";
+        {% endif %}
+
+    </script>
+{% endblock %}

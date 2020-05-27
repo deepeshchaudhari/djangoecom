@@ -1,10 +1,9 @@
 from math import ceil
-
 from django.shortcuts import render
 from django.http import HttpResponse
 
 # import models or database
-from .models import Product,Contact
+from .models import Product,Contact,Order
 # Create your views here.
 def index(request):
     allProds = []
@@ -40,4 +39,26 @@ def prodview(request,myid):
     params={'product':product[0]}
     return render(request,'shop/prodView.html',params)
 def checkout(request):
+    if request.method == "POST":
+        items_json = request.POST.get('itemsJson','its item json')
+        firstname = request.POST.get('firstname', '')
+        lastname = request.POST.get('lastname', '')
+        username = request.POST.get('username', '')
+        email = request.POST.get('email', '')
+        address = request.POST.get('add1', '') + " " + request.POST.get('add2', '')
+        country = request.POST.get('country', 'India')
+        state = request.POST.get('state', 'UP')
+        zip_code = request.POST.get('state','')
+        phone1 = request.POST.get('contact','')
+        phone2 = request.POST.get('contact2','0000000000')
+        order = Order(items_json=items_json,firstname=firstname,lastname=lastname,
+                      username=username, email=email,address=address,country=country,
+                      state=state,Zip_code=zip_code,phone1=phone1,phone2=phone2)
+        print(order.save())
+        thank = True
+        id = order.order_id
+        cart_flag=1;
+        return render(request,'shop/orderplaced.html',{'thank':thank, 'id': id})
     return render(request,'shop/checkout.html')
+def orderplaced(request):
+    return render(request,'shop/orderplaced.html')

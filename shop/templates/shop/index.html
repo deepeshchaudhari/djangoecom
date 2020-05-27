@@ -66,6 +66,7 @@
             <img src='/media/{{i.image}}' class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title" id="namepr{{i.id}}" value="{{i.product_name}}">{{i.product_name}}</h5>
+                <strong><p class="card-title">₹<span id="ppr{{i.id}}" value="{{i.price}}">{{i.price}}</span></p></strong>
               <p class="card-text">{{i.desc|slice:"0:50"}}...</p>
               <span id="divpr{{i.id}}" class="divpr">
               <button id="pr{{i.id}}" class="btn btn-primary cart">Add To Cart</button>
@@ -112,12 +113,13 @@
 
     if (cart[idstr] != undefined){
       qty=cart[idstr][0]+1;
-      cart[idstr]=[qty,name];
+      cart[idstr]=[qty,name,price];
     }
     else{
         qty=1;
         name=document.getElementById('name' + idstr).innerHTML;
-        cart[idstr]= [qty,name];
+        price=document.getElementById('p' + idstr).innerHTML;
+        cart[idstr]= [qty,name,price];
     }
     updatecart(cart);
 
