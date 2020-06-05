@@ -1,0 +1,55 @@
+{%  extends 'shop/basic.html'%}
+
+{% block title %} Title of Login{% endblock %}
+ {% block css %}
+
+{% endblock %}
+{% block body %}
+<div class="container ">
+  <div class="py-5 text-center">
+    <h2>Login to Ecom</h2>
+    <p class="lead">Enter username and password below</p>
+  </div>
+    <center>
+    <div class="col-md-4 " >
+      <form action="/shop/login/" method="post" class="needs-validation" novalidate>{% csrf_token %}
+
+        <div class="row">
+        <div class="mb-3">
+          <label for="email">Email</label>
+          <input type="email" class="form-control"
+                 name ="email" id="email"
+                 placeholder="you@example.com" required>
+          <div class="invalid-feedback">
+            Please enter a valid email address for login.
+          </div>
+        </div>
+        </div>
+
+        <div class="row">
+         <div class="mb-3">
+          <label for="password">Password</label>
+          <input type="password" class="form-control"
+                 name ="password" id="password"
+                 placeholder="********" required>
+          <div class="invalid-feedback">
+            wrong password
+          </div>
+        </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3 mb-3">
+          <button class="btn btn-success btn-lg mb-6"
+                  name="submit" id="submit"
+                  type="submit">Login</button>
+          </div>
+        </div>
+
+        <hr class="mb-47">
+
+      </form>
+    </div>
+    </center>
+</div>
+{% endblock %}

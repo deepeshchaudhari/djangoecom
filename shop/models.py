@@ -1,6 +1,10 @@
 from django.db import models
 
 # Create your models here.
+
+#run this command if changes not apply after n=migrations
+# python manage.py migrate --run-syncdb
+
 class Product(models.Model):
     product_id = models.AutoField
     product_name = models.CharField(max_length=50)
@@ -37,8 +41,17 @@ class Order(models.Model):
     country = models.CharField(max_length=100,default="")
     state = models.CharField(max_length=100,default="")
     Zip_code = models.CharField(max_length=100,default="")
-    phone1 = models.CharField(max_length=20,default="")
-    phone2 = models.CharField(max_length=20,default="0000000000")
+    phone1 = models.CharField(max_length=20,default="xxxxx")
+    phone2 = models.CharField(max_length=20,default="xxxxx")
 
     def __str__(self):
         return self.firstname
+
+class Customer(models.Model):
+    customer_id = models.AutoField(primary_key= True)
+    name = models.CharField(max_length=50)
+    email = models.CharField(max_length=50)
+    password  = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name

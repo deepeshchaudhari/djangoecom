@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 # import models or database
-from .models import Product,Contact,Order
+from .models import Product,Contact,Order,Customer
 # Create your views here.
 def index(request):
     allProds = []
@@ -57,8 +57,23 @@ def checkout(request):
         print(order.save())
         thank = True
         id = order.order_id
-        cart_flag=1;
         return render(request,'shop/orderplaced.html',{'thank':thank, 'id': id})
     return render(request,'shop/checkout.html')
 def orderplaced(request):
     return render(request,'shop/orderplaced.html')
+def login(request):
+    if request.method == "POST":
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        if Customer.objects.filter(email=email,password= password):
+            id = Customer.objects.filter(email=email,password= password).values('customer_id')
+            status = 'logged in'
+            print(status)
+            return render(request,'shop/success.html',{'status':status,'id': id})
+        else:
+            status='wrong credentials'
+            return render(request,'shop/success.html',{'status':status})
+    return render(request,'shop/login.html')
+
+def success(request):
+    render(request,'shop/success.html')

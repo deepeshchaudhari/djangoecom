@@ -1,0 +1,9 @@
+{%  extends 'shop/basic.html'%}
+
+{% block title %} Title of Successfull logged in{% endblock %}
+{% block body %}
+{% if id %}
+{{id}}
+{% endif %}
+logged in {{status}}
+{% endblock %}
